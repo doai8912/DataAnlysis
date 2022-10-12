@@ -1,0 +1,22 @@
+import csv
+
+max_temp = -999
+max_date = ''
+
+f = open('seoul_0914.csv', 'r', encoding='cp949') #Colab은 파일의 위치를 입력해야 한다.
+data = csv.reader(f)
+header = next(data)
+
+print(header)
+for row in data:
+    if row[4] == '':
+        row[4]= -999
+    
+    row[4] = float(row[4])
+    
+    if max_temp < row[4]:
+        max_temp = row[4]
+        max_date = row[0]
+
+print('기상 관측 이래 서울의 최고 기온이 가장 높았던 날은', max_date + '로', max_temp, '도 였습니다.')
+f.close()
